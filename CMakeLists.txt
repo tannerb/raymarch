@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(raymarcher)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp gl_3_3.cpp)
 
 set(BIN_DIR bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
@@ -22,19 +22,23 @@ endif()
 
 find_package (glm REQUIRED)
 find_package (OpenGL REQUIRED)
+find_package (GLFW REQUIRED)
 
 include_directories(
         ${GLM_INCLUDE_DIR}
+        ${GLFW_INCLUDE_DIR}
 )
 
 add_executable(raymarcher ${SOURCE_FILES})
 
 target_link_libraries(
         raymarcher
-        ${OPENGL_gl_LIBRARY})
+        ${OPENGL_gl_LIBRARY}
+        ${GLFW_LIBRARIES})
 
 
 MESSAGE( WARNING "C++ build flags: " ${CMAKE_CXX_FLAGS} )
+MESSAGE( WARNING "GLFW: " ${GLFW_FOUND})
 
 install (TARGETS raymarcher RUNTIME DESTINATION ${BIN_DIR})
 
