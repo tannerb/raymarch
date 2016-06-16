@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(raymarcher)
 
-set(SOURCE_FILES main.cpp gl_3_3.cpp)
+set(SOURCE_FILES main.cpp gl_core_3_3.c gl_core_3_3.h shader.cpp shader.h model.cpp model.h camera.cpp camera.h renderer.cpp renderer.h object.cpp object.h lens.cpp lens.h)
 
 set(BIN_DIR bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 set(glm ../../usr/include/glm)
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU" OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra -pedantic -std=c++11 -DDEBUG")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra -pedantic -std=c++1y -DDEBUG")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_DEBUG} -g")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE} -O2")
 elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
@@ -25,7 +25,7 @@ find_package (OpenGL REQUIRED)
 find_package (GLFW REQUIRED)
 
 include_directories(
-        ${GLM_INCLUDE_DIR}
+        ${GLM_INCLUDE_DIRS}
         ${GLFW_INCLUDE_DIR}
 )
 
